@@ -32,3 +32,4 @@ id  name
 - [Functions and Operators](https://dev.mysql.com/doc/refman/5.7/en/functions.html)
 - [CREATE TABLE Statement](https://dev.mysql.com/doc/refman/5.7/en/create-table.html)
 - [CREATE PROCEDURE and CREATE FUNCTION Statements](https://dev.mysql.com/doc/refman/5.7/en/create-procedure.html)
+- [MySQL BEFORE UPDATE Trigger – A Complete Guide](https://mysqlcode.com/mysql-before-update-trigger/)
