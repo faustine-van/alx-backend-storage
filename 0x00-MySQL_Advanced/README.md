@@ -19,8 +19,8 @@ id  name
 7   Suspense
 8   Thriller
 ```
-### Tasks
-- task0: Import table dump: [metal_bands.sql.zip]()
+### Tasks files
+- 2-fans.sql: Import table dump: [metal_bands.sql.zip](https://github.com/faustine-van/alx-backend-storage/blob/master/0x00-MySQL_Advanced/dump_sql_files/metal_bands.sql)
 ### Reference
 
 - [MySQL cheatsheet](https://devhints.io/mysql?utm_campaign=ALX%20-%202023%20-%20SE%20Cohort%2013&utm_medium=email&_hsmi=81332650&_hsenc=p2ANqtz--BHD76ZQc9Rx9p3knO0x8PSKxVHSFpxWD1lXgScRTzZuTQ0qbDIPsD710X4CaIMxMl4K3MnfvEw0Chl8jZ6YNVLCMeVF0O_lXDA_DdQ5svkEnbBJM&utm_content=81332650&utm_source=hs_email)
