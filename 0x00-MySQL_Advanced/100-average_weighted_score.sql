@@ -1,10 +1,11 @@
 -- SQL script that creates a stored procedure ComputeAverageWeightedScoreForUser
 -- that computes and store the average weighted score for a student
 DELIMITER //
+
 CREATE PROCEDURE ComputeAverageWeightedScoreForUser(user_id INT)
 BEGIN
   -- create varibale to store average
-  DECLARE averageWeighted DECIMAL(10, 2);
+  DECLARE averageWeighted DEFAULT 0;
   DECLARE total_score INT DEFAULT 0;
   DECLARE total_weight INT DEFAULT 0;
 
@@ -24,4 +25,5 @@ BEGIN
   UPDATE users SET average_score = averageWeighted WHERE id = user_id;
 
 END //
+
 DELIMITER ;
