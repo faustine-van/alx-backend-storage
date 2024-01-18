@@ -11,7 +11,7 @@ BEGIN
   -- collecting scores and weight for student from corrections
   SELECT SUM(c.score * p.weight), SUM(p.weight) INTO total_score, total_weight
   FROM corrections AS c
-  INNER JOIN projects AS p ON c.project_id = p.id
+  JOIN projects AS p ON c.project_id = p.id
   WHERE c.user_id = user_id;
 
   -- calculate average score (if total_weight is not 0)
@@ -21,7 +21,7 @@ BEGIN
     SET averageWeighted = 0;
   END IF;
   -- update average weighted score for user_id specified
-  UPDATE users SET average_score = averageWeighted WHERE id = user_id;
+  UPDATE users SET average_score = averageWeighted WHERE users.id = user_id;
 
 END //
 DELIMITER ;
