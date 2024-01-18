@@ -2,7 +2,7 @@
 -- that computes and store the average score for a student.
 -- NB: An average score can be a decimal
 DELIMITER //
-CREATE PROCEDURE ComputeAverageScoreForUser(user_id INT)
+CREATE PROCEDURE ComputeAverageScoreForUser(IN user_id INT)
 BEGIN
   -- create varibale to store average
   DECLARE average DECIMAL(10, 2);
