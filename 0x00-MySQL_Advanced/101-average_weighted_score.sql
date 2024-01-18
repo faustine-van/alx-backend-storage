@@ -11,7 +11,7 @@ BEGIN
   -- collecting scores and weight for student from corrections
   SELECT SUM(c.score * p.weight), SUM(p.weight) INTO total_score, total_weight
   FROM corrections c
-  JOIN projects p ON c.user_id = p.id;
+  JOIN projects p ON c.project_id = p.id;
  
   -- calculate average score (if total_weight is not 0)
   IF  total_weight > 0 THEN
