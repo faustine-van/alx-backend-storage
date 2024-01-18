@@ -19,6 +19,31 @@ id  name
 7   Suspense
 8   Thriller
 ```
+### RUN MYSQL file
+```
+bob@dylan:~$ cat 6-main.sql
+Enter password: 
+-- Show and add bonus correction
+SELECT * FROM projects;
+SELECT * FROM corrections;
+
+SELECT "--";
+
+CALL AddBonus((SELECT id FROM users WHERE name = "Jeanne"), "Python is cool", 100);
+
+CALL AddBonus((SELECT id FROM users WHERE name = "Jeanne"), "Bonus project", 100);
+CALL AddBonus((SELECT id FROM users WHERE name = "Bob"), "Bonus project", 10);
+
+CALL AddBonus((SELECT id FROM users WHERE name = "Jeanne"), "New bonus", 90);
+
+SELECT "--";
+
+SELECT * FROM projects;
+SELECT * FROM corrections;
+
+bob@dylan:~$ 
+bob@dylan:~$ cat 6-main.sql | mysql -uroot -p holberton 
+```
 ### Tasks files
 - 2-fans.sql: Import table dump: [metal_bands.sql.zip](https://github.com/faustine-van/alx-backend-storage/blob/master/0x00-MySQL_Advanced/dump_sql_files/metal_bands.sql)
 ### Reference
