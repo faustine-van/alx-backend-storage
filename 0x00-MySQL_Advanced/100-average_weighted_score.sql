@@ -16,10 +16,10 @@ BEGIN
   WHERE c.user_id = user_id;
 
   -- calculate average score (if total_weight is not 0)
-  IF  total_weight > 0 THEN
-    SET averageWeighted = total_score / total_weight;
-  ELSE
+  IF  total_weight = 0 THEN
     SET averageWeighted = 0;
+  ELSE
+    SET averageWeighted = total_score / total_weight;
   END IF;
   -- update average weighted score for user_id specified
   UPDATE users SET average_score = averageWeighted WHERE id = user_id;
