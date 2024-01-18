@@ -5,8 +5,8 @@ CREATE PROCEDURE ComputeAverageWeightedScoreForUser(user_id INT)
 BEGIN
   -- create varibale to store average
   DECLARE averageWeighted DECIMAL(10, 2);
-  DECLARE total_score INT;
-  DECLARE total_weight INT;
+  DECLARE total_score INT DEFAULT 0;
+  DECLARE total_weight INT DEFAULT 0;
 
   -- collecting scores and weight for student from corrections
   SELECT SUM(c.score * p.weight), SUM(p.weight) INTO total_score, total_weight
