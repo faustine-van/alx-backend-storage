@@ -5,7 +5,7 @@ DELIMITER //
 CREATE PROCEDURE ComputeAverageWeightedScoreForUser(user_id INT)
 BEGIN
   -- create varibale to store average
-  DECLARE averageWeighted DEFAULT 0;
+  DECLARE averageWeighted DECIMAL(10, 2);
   DECLARE total_score INT DEFAULT 0;
   DECLARE total_weight INT DEFAULT 0;
 
