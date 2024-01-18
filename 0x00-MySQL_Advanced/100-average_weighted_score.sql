@@ -21,7 +21,7 @@ BEGIN
     SET averageWeighted = 0;
   END IF;
   -- update average weighted score for user_id specified
-  UPDATE users SET average_score = averageWeighted WHERE users.id = user_id;
+  UPDATE users SET average_score = averageWeighted WHERE id = user_id;
 
 END //
 DELIMITER ;
