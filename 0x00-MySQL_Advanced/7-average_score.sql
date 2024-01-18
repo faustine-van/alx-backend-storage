@@ -5,9 +5,11 @@ DELIMITER //
 CREATE PROCEDURE ComputeAverageScoreForUser(user_id INT)
 BEGIN
   -- create varibale to store average
-  DECLARE @average DECIMAL(10, 2);
+  DECLARE average DECIMAL(10, 2);
+
   -- caculate or computes average  of a scores column for students.
-  SELECT AVG(score) INTO @average FROM corrections WHERE user_id = user_id;
+  SELECT AVG(score) INTO average FROM corrections WHERE user_id = user_id;
+
   -- store the average score for a student
   UPDATE users SET average_score = average WHERE id = user_id;
 END //
