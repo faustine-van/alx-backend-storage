@@ -1,7 +1,7 @@
 -- SQL script that creates a stored procedure ComputeAverageWeightedScoreForUser
 -- that computes and store the average weighted score for a student
 DELIMITER //
-CREATE PROCEDURE  ComputeAverageWeightedScoreForUser()
+CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 BEGIN
   -- create varibale to store average
   DECLARE averageWeighted DECIMAL(10, 2);
