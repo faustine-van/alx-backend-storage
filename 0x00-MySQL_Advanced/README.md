@@ -44,6 +44,14 @@ SELECT * FROM corrections;
 bob@dylan:~$ 
 bob@dylan:~$ cat 6-main.sql | mysql -uroot -p holberton 
 ```
+
+### ERROR
+```
+ERROR 1329 (02000) at line 6: No data - zero rows fetched, selected, or processed
+```
+- Solution: Always set Handler
+
+
 ### Tasks files
 - 2-fans.sql: Import table dump: [metal_bands.sql.zip](https://github.com/faustine-van/alx-backend-storage/blob/master/0x00-MySQL_Advanced/dump_sql_files/metal_bands.sql)
 ### Reference

@@ -3,15 +3,18 @@
 
 DELIMITER //
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
- BEGIN
- 
+ BEGIN 
   DECLARE user_id_param INT;
   -- Declare variables to store scores and weights for each user
   DECLARE total_score INT;
   DECLARE total_weight INT;
+  DECLARE done BOOLEAN;
 
   -- Declare a cursor to loop through user IDs
   DECLARE user_cursor CURSOR FOR SELECT id FROM users;
+  -- control what happens when a cursor reaches the end or
+  -- If no more rows are available
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
 
   -- open cursor
@@ -23,7 +26,8 @@ CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
       -- fetching next user_id from cursor
       FETCH user_cursor INTO user_id_param;
       -- check if no more users
-      IF user_id_param IS NULL THEN
+      -- IF user_id_param IS NULL THEN
+      IF done THEN
         LEAVE use_loop;
       END IF;
 
@@ -31,12 +35,12 @@ CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
       SET total_weight = 0;
 
       -- collecting scores and weight for student from corrections
-      SELECT COALESCE(SUM(c.score * p.weight), 0), COALESCE(SUM(p.weight), 0)
+      SELECT IFNULL(SUM(c.score * p.weight), 0), IFNULL(SUM(p.weight), 0)
       INTO total_score, total_weight
       FROM corrections c
-      LEFT JOIN projects p ON c.project_id = p.id
+      JOIN projects p ON c.project_id = p.id
       WHERE c.user_id = user_id_param;
- 
+  
       -- calculate average score (if total_weight is not 0)
       IF  total_weight > 0 THEN
          -- update average weighted score for user_id specified
