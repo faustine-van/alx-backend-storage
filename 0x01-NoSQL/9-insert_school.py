@@ -9,5 +9,6 @@ def insert_school(mongo_collection, **kwargs):
        based on kwargs:
        Returns the new _id
    """
-   for key, val in enumerate(kwargs):
-      mongo_collection.insert_many([{f'{key}': val}])
+   mongo_collection.insert_many([kwargs])
+
+   return kwargs.get('_id')
