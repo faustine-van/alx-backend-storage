@@ -8,6 +8,9 @@ def list_all(mongo_collection):
    """ lists all documents in a collection
        mongo_collection will be the pymongo collection object
    """
-   if mongo_collection.find() is None:
+   has_doc = bool(mongo_collection.find_one({}))
+
+   if not has_doc:
        return []
-   return mongo_collection.find()
+   else:
+       return mongo_collection.find()
