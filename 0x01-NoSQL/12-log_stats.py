@@ -14,21 +14,21 @@ if __name__=="__main__":
     nPuts = nginx_collection.count_documents({"method": "PUT"})
     nPatchs = nginx_collection.count_documents({"method": "PATCH"})
     nDelets = nginx_collection.count_documents({"method": "DELETE"})
-    stats = nginx_collection.count_documents({"method": "GET", "path": "/status"})
     print(f'{nginx_collection.count_documents({})} logs\n'
           f'Methods:\n    method GET: {nGets}\n'
           f'    method POST: {nPosts}\n'
           f'    method PUT: {nPuts}\n'
           f'    method PATCH: {nPatchs}\n'
-          f'    method DELETE: {nDelets}\n'
-          f'{stats} status check')
+          f'    method DELETE: {nDelets}')
+    # status check GET
     status_pipeline = [
        {
-        '$match': {"method": "GET", "path": "/status"
+        '$match': {"method": "GET", "path": "/status"}
        },
        {
         '$count': 'total_status'
        }
-   ]
-   stats = nginx_collection.aggregate([status_pipeline])
-   print(stats.total_status)
+    ]
+    stats = nginx_collection.aggregate(status_pipeline)
+    for stats in stats:
+        print('{} status check'.format(stats.get('total_status')))
