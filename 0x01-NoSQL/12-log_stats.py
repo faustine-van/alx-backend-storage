@@ -13,7 +13,12 @@ if __name__ == "__main__":
     nPuts = nginx_collection.count_documents({"method": "PUT"})
     nPatchs = nginx_collection.count_documents({"method": "PATCH"})
     nDelets = nginx_collection.count_documents({"method": "DELETE"})
-    print(f'{nginx_collection.count_documents({})} logs')
+    print(f'{nginx_collection.count_documents({})} logs\n'
+          f'Methods:\n    method GET: {nGets}\n'
+          f'    method POST: {nPosts}\n'
+          f'    method PUT: {nPuts}\n'
+          f'    method PATCH: {nPatchs}\n'
+          f'    method DELETE: {nDelets}')
     # status check GET
     status_pipeline = [
        {
@@ -26,3 +31,52 @@ if __name__ == "__main__":
     stats = nginx_collection.aggregate(status_pipeline)
     for stats in stats:
         print('{} status check'.format(stats.get('total_status')))
+    pipeline = [
+  {
+    '$facet': {
+      'GET': [
+        {
+         '$match': {"method": "GET"}
+        },
+        {
+          '$count': 'count'
+        }
+      ], 
+      'POST': [
+        {
+         '$match': {"method": "POST"}
+        },
+        {
+          '$count': 'count'
+        }
+      ], 
+      'PUT': [
+        {
+         '$match': {"method": "PUT"}
+        },
+        {
+          '$count': 'count'
+        }
+      ],
+      'PATCH': [
+        {
+         '$match': {"method": "PATCH"}
+        },
+        {
+          '$count': 'count'
+        }
+      ],
+      'DELETE': [
+        {
+         '$match': {"method": "DELETE"}
+        },
+        {
+          '$count': 'count'
+        }
+      ]
+    }
+   }
+]
+    pips = nginx_collection.aggregate(pipeline)
+    for pip in pips:
+        print('method {}'.format(pip))
