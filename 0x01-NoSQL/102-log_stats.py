@@ -8,13 +8,20 @@ from pymongo import MongoClient
 if __name__ == "__main__":
     client = MongoClient('mongodb://127.0.0.1:27017')
     nginx_collection = client.logs.nginx
+    count = [
+        {
+          '$count': 'count'
+        }
+    ]
+    total = nginx_collection.aggregate(count)
+    for t in total:
+        print('{} logs'.format(t.get('count')))
     nGets = nginx_collection.count_documents({"method": "GET"})
     nPosts = nginx_collection.count_documents({"method": "POST"})
     nPuts = nginx_collection.count_documents({"method": "PUT"})
     nPatchs = nginx_collection.count_documents({"method": "PATCH"})
     nDelets = nginx_collection.count_documents({"method": "DELETE"})
-    print(f'{nginx_collection.count_documents({})} logs\n'
-          f'Methods:\n    method GET: {nGets}\n'
+    print(f'Methods:\n    method GET: {nGets}\n'
           f'    method POST: {nPosts}\n'
           f'    method PUT: {nPuts}\n'
           f'    method PATCH: {nPatchs}\n'
@@ -39,6 +46,7 @@ if __name__ == "__main__":
            'total': {
              '$sum': 1
            }
+          'ip': {'$first': '$ip'}
          }
        },
        {
