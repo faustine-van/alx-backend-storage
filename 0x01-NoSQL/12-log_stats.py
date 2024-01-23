@@ -15,7 +15,7 @@ if __name__=="__main__":
     nPatchs = nginx_collection.count_documents({"method": "PATCH"})
     nDelets = nginx_collection.count_documents({"method": "DELETE"})
     stats = nginx_collection.count_documents({"method": "GET", "path": "/status"})
-    print(f'{nginx_collection.count_documents({})} status check\n'
+    print(f'{nginx_collection.count_documents({})} logs\n'
           f'Methods:\n    method GET: {nGets}\n'
           f'    method POST: {nPosts}\n'
           f'    method PUT: {nPuts}\n'
