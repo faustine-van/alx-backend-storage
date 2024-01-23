@@ -22,3 +22,13 @@ if __name__=="__main__":
           f'    method PATCH: {nPatchs}\n'
           f'    method DELETE: {nDelets}\n'
           f'{stats} status check')
+    status_pipeline = [
+       {
+        '$match': {"method": "GET", "path": "/status"
+       },
+       {
+        '$count': 'total_status'
+       }
+   ]
+   stats = nginx_collection.aggregate([status_pipeline])
+   print(stats.total_status)
