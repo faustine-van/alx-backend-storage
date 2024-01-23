@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     count = [
         {
-          '$count':'count'
+          '$count': 'count'
         }
     ]
     total = nginx_collection.aggregate(count)
