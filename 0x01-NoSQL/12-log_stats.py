@@ -5,10 +5,9 @@
 from pymongo import MongoClient
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     client = MongoClient('mongodb://127.0.0.1:27017')
-    nginx_collection = client.logs.nginx    
-
+    nginx_collection = client.logs.nginx
     nGets = nginx_collection.count_documents({"method": "GET"})
     nPosts = nginx_collection.count_documents({"method": "POST"})
     nPuts = nginx_collection.count_documents({"method": "PUT"})
