@@ -42,11 +42,11 @@ if __name__ == "__main__":
     sorted_ips = [
        {
          '$group': {
-           '_id': '$ip', 
+           '_id': '$ip',
            'total': {
              '$sum': 1
-           }
-          'ip': {'$first': '$ip'}
+           },
+           'ip': {'$first': '$ip'}
          }
        },
        {
@@ -58,7 +58,6 @@ if __name__ == "__main__":
          }
        }
      ]
-     top_ips = nginx_collection.aggregate(sorted_ips)
-     for ip in top_ips:
+    top_ips = nginx_collection.aggregate(sorted_ips)
+    for ip in top_ips:
         print('{} {}'.format(ip.get('ip'), ip.get('total')))
-   
