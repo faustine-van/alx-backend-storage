@@ -2,27 +2,27 @@
 """Writing strings to Redis"""
 import redis
 import uuid
-from typing import Union, Optional
-from typing import Callable
+from typing import Union, Optional, Callable
 
 
-class Cache():
-    """cache"""
-    def __init__(self, flushdb=False):
+class Cache:
+    """Cache class"""
+
+    def __init__(self, flushdb: bool = False):
         self._redis = redis.Redis()
         if flushdb:
             self._redis.flushdb()
 
-    def store(self, data: Union[str, float, int, bytes]) -> str:
-        """generate a random key"""
-        key = str(uuid.uuid4())
+    def store(self, data: Union[str, float, int]) -> str:
+        """Generate a random key and store data in the cache."""
+        key: str = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
 
     def get(self, key: str,
             fn: Optional[Callable[[bytes], Union[str, float, int]]] = None
-            ) -> Optional[Union[str, float, int]]:
-        """generate a random key"""
+            ) -> Union[str, float, int, None]:
+        """Retrieve data from the cache."""
         res = self._redis.get(key)
         if res is None:
             return None
@@ -30,12 +30,12 @@ class Cache():
             return fn(res)
         return res
 
-    def get_str(self, key: str) -> str:
-        """get string"""
-        res = self.get(key, fn=lambda x:  x.decode())
+    def get_str(self, key: str) -> Optional[str]:
+        """Get string from the cache."""
+        res = self.get(key, fn=lambda x: x.decode())
         return res
 
-    def get_in(self, key: str) -> str:
-        """get integers"""
+    def get_in(self, key: str) -> Optional[int]:
+        """Get integers from the cache."""
         res = self.get(key, fn=lambda x: int(x.decode()))
         return res
