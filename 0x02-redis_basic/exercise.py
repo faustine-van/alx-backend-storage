@@ -30,10 +30,12 @@ class Cache():
             return fn(res)
         return res
 
-    def get_str(self, key):
+    def get_str(self, key: str) -> str:
+        """get string"""
         res = self.get(key, fn=lambda x:  x.decode())
         return res
 
-    def get_in(self, key):
+    def get_in(self, key: str) -> str:
+        """get integers"""
         res = self.get(key, fn=lambda x: int(x.decode()))
         return res
