@@ -8,11 +8,10 @@ from typing import Union, Optional, Callable
 class Cache:
     """Cache class"""
 
-    def __init__(self, flushdb: bool = False):
+    def __init__(self):
         """declare"""
         self._redis = redis.Redis()
-        if flushdb:
-            self._redis.flushdb()
+        self._redis.flushdb()
 
     def store(self, data: Union[str, float, int]) -> str:
         """Generate a random key and store data in the cache."""
