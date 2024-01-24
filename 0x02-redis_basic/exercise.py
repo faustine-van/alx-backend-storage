@@ -20,7 +20,7 @@ class Cache:
             self._redis.set(key, data)
         return key
     def get(self, key: str,
-            fn: Optional[Callable[[bytes], Union[str, float, int]]] = None
+            fn: Optional[Callable] = None
             ) -> Union[str, float, int, None]:
         """Retrieve data from the cache."""
         res = self._redis.get(key)
@@ -32,10 +32,10 @@ class Cache:
 
     def get_str(self, key: str) -> Optional[str]:
         """Get string from the cache."""
-        res = self.get(key, fn=lambda x: x.decode())
+        res = self.get(key, fn=str)
         return res
 
     def get_in(self, key: str) -> Optional[int]:
         """Get integers from the cache."""
-        res = self.get(key, fn=lambda x: int(x.decode()))
+        res = self.get(key, fn=int)
         return res
