@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+"""web"""
 import requests
 import redis
 from functools import wraps
@@ -7,7 +9,7 @@ redis_client = redis.Redis()
 
 
 def cache_with_expiry(expiration_time):
-    """"""
+    """x"""
     def decorator(func):
         """"""
         @wraps(func)
